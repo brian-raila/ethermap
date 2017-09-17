@@ -43,8 +43,8 @@ class Wallet:
 			self.pseudo_name = pseudo_name
 			#Save this information on SQLite
 			try:
-				self.__query = coinbase.insert().values(wallet_id=self.wallet_id, json_keystore=str(self.json_keystore), password_hash=self.password_hash,
-				wallet_pseudo=self.pseudo_name, public_address=self.public_address)
+				self.__query = coinbase.insert().values(wallet_id=self.wallet_id, json_keystore=str(self.json_keystore), 
+				password_hash=self.password_hash,wallet_pseudo=self.pseudo_name, public_address=self.public_address)
 				db.execute(self.__query)
 				return json.dumps({"Success" : "Account {} successfully created".format(self.pseudo_name)})
 			except Exception as e:
@@ -92,6 +92,7 @@ class Wallet:
 		else:
 			return -99 #Error
 			
-			
+		
+	
 
 

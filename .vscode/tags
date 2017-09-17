@@ -5,18 +5,20 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 Session	../ethermap/database.py	/^Session = sessionmaker(bind=db)$/;"	kind:variable	line:25
-Wallet	../ethermap/eth.py	/^class Wallet:$/;"	kind:class	line:13
-__init__	../ethermap/eth.py	/^	def __init__(self, exists=False, wallet_id=None, pseudo_name=None):$/;"	kind:member	line:15
+Wallet	../ethermap/eth.py	/^class Wallet:	$/;"	kind:class	line:16
+__init__	../ethermap/eth.py	/^	def __init__(self, exists=False, wallet_id=None, pseudo_name=None):$/;"	kind:member	line:17
 __init__.py	../ethermap/__init__.py	1;"	kind:file	line:1
 coinbase	../ethermap/database.py	/^coinbase = Table('coinbase', meta,$/;"	kind:variable	line:7
-create_new	../ethermap/eth.py	/^	def create_new(self, pseudo_name=None, password=None):$/;"	kind:member	line:33
+create_new	../ethermap/eth.py	/^	def create_new(self, pseudo_name=None, password=None):$/;"	kind:member	line:35
 database.py	../ethermap/database.py	1;"	kind:file	line:1
 db	../ethermap/database.py	/^db = create_engine('sqlite:\/\/\/deebee.db')$/;"	kind:variable	line:4
+encode_hex	../ethermap/eth.py	/^encode_hex = utils.encode_hex$/;"	kind:variable	line:8
 eth.py	../ethermap/eth.py	1;"	kind:file	line:1
-export_wallet	../ethermap/eth.py	/^	def export_wallet(self, password, wallet_id=None, pseudo_name=None):$/;"	kind:member	line:58
-keystore_to_address	../ethermap/eth.py	/^def keystore_to_address(json_keystore, password):	$/;"	kind:function	line:7
-load_wallet	../ethermap/eth.py	/^	def load_wallet(self, wallet_id=None, pseudo_name=None):$/;"	kind:member	line:84
+export_wallet	../ethermap/eth.py	/^	def export_wallet(self, password, wallet_id=None, pseudo_name=None):$/;"	kind:member	line:59
+keystore_to_address	../ethermap/eth.py	/^def keystore_to_address(json_keystore, password):	$/;"	kind:function	line:10
+load_wallet	../ethermap/eth.py	/^	def load_wallet(self, wallet_id=None, pseudo_name=None):$/;"	kind:member	line:85
 maps	../ethermap/database.py	/^maps = Table('wallet_maps', meta,$/;"	kind:variable	line:16
 meta	../ethermap/database.py	/^meta = MetaData()$/;"	kind:variable	line:5
+privtoaddr	../ethermap/eth.py	/^privtoaddr = utils.privtoaddr$/;"	kind:variable	line:7
 session	../ethermap/database.py	/^session = Session()/;"	kind:variable	line:26
 third_party.py	../ethermap/third_party.py	1;"	kind:file	line:1
