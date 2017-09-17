@@ -1,7 +1,7 @@
 from sqlalchemy import *
 from sqlalchemy.orm import sessionmaker
 
-db = create_engine('sqlite:///.db/deebee.db')
+db = create_engine('sqlite:///deebee.db')
 meta = MetaData()
 
 coinbase = Table('coinbase', meta,
@@ -12,6 +12,7 @@ coinbase = Table('coinbase', meta,
 	Column('public_address', String, nullable=False)
 	)
 
+
 maps = Table('wallet_maps', meta,
 	Column('map_id', String, primary_key=True),
 	Column('map_pseudo', String, nullable=False),
@@ -20,6 +21,6 @@ maps = Table('wallet_maps', meta,
 	)
 
 
-meta.create_all(db)
-session = sessionmaker()
-session.configure(bind=db)
+# meta.create_all(db)
+Session = sessionmaker(bind=db)
+session = Session()
