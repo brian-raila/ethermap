@@ -1,6 +1,6 @@
 from ethereum.utils import privtoaddr, encode_hex
 from ethermap.database import *
-from ethereum.tools import keys
+from ethereum import tools
 from passlib.hash import pbkdf2_sha256
 import random, json, os, ast 
  
@@ -10,11 +10,10 @@ def keystore_to_address(json_keystore, password):
 	return address
 
 
-class Wallet:
-	
+class Wallet:	
 	def __init__(self, exists=False, wallet_id=None, pseudo_name=None):
-		self.seed = str(os.urandom(64))
-		if exists is True:
+		self.seed = str(os.urandom(64)) #Unique SHA256 seed everytime
+		if exists is True: #If wallet is existent, Just load it
 			if wallet_id:
 				self.ready_wallet = self.load_wallet(wallet_id=wallet_id)
 			elif pseudo_name:
@@ -34,7 +33,7 @@ class Wallet:
 	#Both are required to create a coinbase/wallet to store Ether
 		if pseudo_name and password:
 			self.wallet_id = str(random.random())[2:]
-			self.json_keystore = keys.make_keystore_json(keys.sha3(self.seed), password)
+			self.json_keystore = keys.make_keystore_json(tools.keys.sha3(self.seed), password)
 
 			self.public_address = keystore_to_address(self.json_keystore, password)
 			self.password_hash = pbkdf2_sha256.encrypt(password)
@@ -45,7 +44,6 @@ class Wallet:
 				wallet_pseudo=self.pseudo_name, public_address=self.public_address)
 				db.execute(self.__query)
 				return json.dumps({"Success" : "Account {} successfully created".format(self.pseudo_name)})
-
 			except Exception as e:
 				return json.dumps({"Error": str(e)})
 		elif not pseudo_name:
@@ -62,7 +60,7 @@ class Wallet:
 		elif wallet_id:
 			wallet = session.query(coinbase).filter_by(wallet_id=wallet_id).one()
 			if pbkdf2_sha256.verify(password, wallet.password_hash) is True:
-				private_key = keys.decode_keystore_json(ast.literal_eval(wallet.json_keystore), password)
+				private_key = tools.keys.decode_keystore_json(ast.literal_eval(wallet.json_keystore), password)
 				private_key = str(encode_hex(private_key))
 				return json.dumps({"Success" : "Private Key : {}".format(private_key)})	
 			#If the provided password was incorrect
@@ -71,7 +69,7 @@ class Wallet:
 		elif pseudo_name:
 			wallet = session.query(coinbase).filter_by(wallet_pseudo=pseudo_name).one()
 			if pbkdf2_sha256.verify(password, wallet.password_hash) is True:
-				private_key = keys.decode_keystore_json(ast.literal_eval(wallet.json_keystore), password)
+				private_key = tools.keys.decode_keystore_json(ast.literal_eval(wallet.json_keystore), password)
 				private_key = encode_hex(private_key)
 				return json.dumps({"Success" : "Private Key : {}".format(private_key)})	
 			#If the provided password was incorrect
