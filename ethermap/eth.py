@@ -1,8 +1,11 @@
-from ethereum.utils import privtoaddr, encode_hex
+from ethereum import utils
 from ethermap.database import *
 from ethereum import tools
 from passlib.hash import pbkdf2_sha256
 import random, json, os, ast 
+
+privtoaddr = utils.privtoaddr
+encode_hex = utils.encode_hex
  
 def keystore_to_address(json_keystore, password):	
 	address = privtoaddr(keys.decode_keystore_json(json_keystore, password))
